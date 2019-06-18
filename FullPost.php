@@ -1,6 +1,37 @@
 <?php require_once("Include/DB.php"); ?>
 <?php require_once("Include/Sessions.php"); ?>
 <?php require_once("Include/Functions.php"); ?>
+
+<?php
+  if(isset($_POST["Submit"])){
+    $Name = mysqli_real_escape_string($Connection, $_POST["Name"]);
+    $Email = mysqli_real_escape_string($Connection, $_POST["Email"]);
+    $Comment = mysqli_real_escape_string($Connection, $_POST["Comment"]);
+    date_default_timezone_set("Asia/Kolkata");
+    $CurrentTime = Time();
+    $DateTime = strftime("%B-%d-%Y %H:%M:%S", $CurrentTime);
+    $DateTime;
+    $PostId = $_GET["id"];
+    if(empty($Name) || empty($Email) || empty($Comment)){
+      $_SESSION["ErrorMessage"] = "All Fiels are required.";
+    }elseif (strlen($Comment) > 500){
+      $_SESSION["ErrorMessage"] = "Only 500 hundred characters are allowed.";
+    }else {
+      global $Connection;
+      $Query = "INSERT INTO comments(datetime, name, email, comment, status)
+      VALUES('$DateTime','$Name','$Email','$Comment','OFF')";
+      $Execute = mysqli_query($Connection,$Query);
+      if ($Execute){
+        $_SESSION["SuccessMessage"] = "Comment Submitted Successfully.";
+        Redirect_to("FullPost.php?id={$PostId}");
+      }else {
+        $_SESSION["ErrorMessage"] = "Something went wrong. Try Again!!";
+        Redirect_to("FullPost.php?id={$PostId}");
+      }
+    }
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
   <head>
@@ -64,6 +95,10 @@
       <div class="row"><!--Row-->
         <div class="col-sm-8"><!--Main Blog Area-->
           <?php
+          echo Message();
+          echo SuccessMessage();
+         ?>
+          <?php
             global $Connection;
             if(isset($_GET["SearchButton"])){
               $Search = $_GET["Search"];
@@ -106,7 +141,7 @@
          <span class="FieldInfo">Comments:</span>
          <br><br>
          <div>
-           <form action="AddNewPost.php" method="post" enctype="multipart/form-data">
+           <form action="FullPost.php?id=<?php echo $PostId; ?>" method="post" enctype="multipart/form-data">
              <fieldset>
                <div class="form-group">
                  <label for="Name"><span class="FieldInfo">Name:</span></label>
