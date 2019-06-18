@@ -55,7 +55,7 @@
                 <br><br>
                 <ul id="Side_Menu" class="nav nav-pills nav-stacked">
                     <li class="active"><a href="Dashboard.php"><span class="glyphicon glyphicon-th"></span>&nbsp;Dashboard</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Add New Post</a></li>
+                    <li><a href="AddNewPost.php"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Add New Post</a></li>
                     <li><a href="Categories.php"><span class="glyphicon glyphicon-tags"></span>&nbsp;Categories</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp;Manage Admins</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-comment"></span>&nbsp;Comments</a></li>
@@ -101,14 +101,30 @@
                       ?>
                       <tr>
                         <td><?php echo $SrNo ?></td>
-                        <td><?php echo $Title ?></td>
-                        <td><?php echo $DateTime ?></td>
-                        <td><?php echo $Admin ?></td>
-                        <td><?php echo $Category ?></td>
+                        <td style="color: #5e5eff;"><?php
+                        if(strlen($Title)>20){$Title = substr($Title, 0, 20)."..";}
+                        echo $Title ?>
+                      </td>
+                        <td><?php
+                        if(strlen($DateTime)>11){$DateTime = substr($DateTime, 0, 11)."..";}
+                        echo $DateTime ?>
+                        </td>
+                        <td><?php
+                        if(strlen($Admin)>6){$Admin = substr($Admin, 0, 6)."..";}
+                        echo $Admin ?>
+                        </td>
+                        <td><?php
+                        if(strlen($Category)>7){$Category = substr($Category, 0, 7)."..";}
+                        echo $Category ?></td>
                         <td><img src="Upload/<?php echo $Image ?>" width="200";height="40px"></td>
                         <td>Processing</td>
-                        <td>Edit & Delete</td>
-                        <td>Live Preview</td>
+                        <td><a href="EditPost.php?Edit=<?php $Id; ?>">
+                          <span class="btn btn-warning">Edit</span></a>
+                        <a href="DeletePost.php?Delete=<?php $Id; ?>">
+                          <span class="btn btn-danger">Delete</span></a></td>
+                        <td>
+                          <a href="FullPost.php?id=<?php echo $Id; ?>" target="_blank">
+                          <span class="btn btn-primary">Live Preview</span></a></td>
                       </tr>
                     <?php } ?>
                   </table>
