@@ -17,9 +17,10 @@
     }elseif (strlen($Comment) > 500){
       $_SESSION["ErrorMessage"] = "Only 500 hundred characters are allowed.";
     }else {
+      $PostIDFromURL = $_GET["id"];
       global $Connection;
-      $Query = "INSERT INTO comments(datetime, name, email, comment, status)
-      VALUES('$DateTime','$Name','$Email','$Comment','OFF')";
+      $Query = "INSERT INTO comments(datetime, name, email, comment, status, admin_panel_id)
+      VALUES('$DateTime','$Name','$Email','$Comment','OFF', '$PostIDFromURL')";
       $Execute = mysqli_query($Connection,$Query);
       if ($Execute){
         $_SESSION["SuccessMessage"] = "Comment Submitted Successfully.";
