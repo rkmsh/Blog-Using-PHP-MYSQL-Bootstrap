@@ -1,0 +1,39 @@
+/*.navbar-nav li{
+  font-weight: bold;
+  font-family: Bitter, Georgia, Times, "Times New Roman", serif;
+  font-size: 1.2em;
+}*/
+
+.Line{
+  margin-top: -20px;
+}
+
+#Footer{
+    padding: 10px;
+    border-top: 1px solid black;
+    color: #eeeeee;
+    background-color: #211f22;
+    text-align: center;
+}
+
+#heading{
+  font-family: Bitter, Georgia, "Times New Roman", Times, serif;
+  font-weight: bold;
+  color: #005E90;
+}
+
+#heading:hover{
+  color: #0090DB;
+}
+
+.description{
+  color: #868686;
+  font-weight: bold;
+  margin-top: -2px;
+}
+
+.post{
+  font-size: 1.1em;
+  font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+  text-align: justify;
+}
