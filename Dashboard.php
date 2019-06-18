@@ -33,7 +33,7 @@
       <div class="collapse navbar-collapse" id="collapse">
       <ul class="nav navbar-nav lead">
         <li><a href="#">Home</a></li>
-        <li class="active"><a href="Blog.php" target="_blank">Blog</a></li>
+        <li><a href="Blog.php" target="_blank">Blog</a></li>
         <li><a href="#">About Us</a></li>
         <li><a href="#">Services</a></li>
         <li><a href="#">Contact Us</a></li>

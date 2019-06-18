@@ -14,6 +14,11 @@
     .col-sm-3{
       background-color: green;
     }
+    .FieldInfo{
+      color: rgb(251, 174, 44);
+      font-family: Bitter, Georgia, "Times New Roman", Times, serif;
+      font-size: 1.2em;
+    }
     </style>
   </head>
   <body>
@@ -94,6 +99,33 @@
            </div>
          </div>
          <?php } ?>
+         <br><br>
+         <br><br>
+         <span class="FieldInfo">Share your thoughts about this post.</span>
+         <br>
+         <span class="FieldInfo">Comments:</span>
+         <br><br>
+         <div>
+           <form action="AddNewPost.php" method="post" enctype="multipart/form-data">
+             <fieldset>
+               <div class="form-group">
+                 <label for="Name"><span class="FieldInfo">Name:</span></label>
+                 <input class="form-control" type="text" name="Name" id="Name" placeholder="Name">
+               </div>
+               <div class="form-group">
+                 <label for="Email"><span class="FieldInfo">Email:</span></label>
+                 <input class="form-control" type="email" name="Email" id="Email" placeholder="Email">
+               </div>
+               <div class="form-group">
+                 <label for="commentarea"><span class="FieldInfo">Comment:</span></label>
+                 <textarea class="form-control" name="Comment" id="commentarea"></textarea>
+               </div>
+               <input class="btn btn-primary" type="Submit" name="Submit" value="Submit">
+               <br><br>
+             </form>
+             <br>
+             </fieldset>
+         </div>
         </div><!--Ending Blog Main Area-->
         <div class="col-sm-offset-1 col-sm-3"><!--Side Area-->
           <h2>Test</h2>
