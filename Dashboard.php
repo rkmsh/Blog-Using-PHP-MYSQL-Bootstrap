@@ -118,9 +118,9 @@
                         echo $Category ?></td>
                         <td><img src="Upload/<?php echo $Image ?>" width="200";height="40px"></td>
                         <td>Processing</td>
-                        <td><a href="EditPost.php?Edit=<?php $Id; ?>">
+                        <td><a href="EditPost.php?Edit=<?php echo $Id; ?>">
                           <span class="btn btn-warning">Edit</span></a>
-                        <a href="DeletePost.php?Delete=<?php $Id; ?>">
+                        <a href="DeletePost.php?Delete=<?php echo $Id; ?>">
                           <span class="btn btn-danger">Delete</span></a></td>
                         <td>
                           <a href="FullPost.php?id=<?php echo $Id; ?>" target="_blank">

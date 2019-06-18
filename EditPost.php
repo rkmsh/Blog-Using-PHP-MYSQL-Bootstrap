@@ -22,16 +22,18 @@
       Redirect_to("AddNewPost.php");
     }else {
       global $Connection;
-      $Query = "INSERT INTO admin_panel(datetime,title,category,author,image,post)
-      VALUES('$DateTime', '$Title', '$Category', '$Admin', '$Image', '$Post')";
+      $EditFromURL = $_GET['Edit'];
+      $Query = "UPDATE admin_panel SET datetime='$DateTime', title='$Title',
+      category='$Category', author = '$Admin', image = '$Image', post = '$Post'
+       WHERE id = '$EditFromURL'";
       $Execute = mysqli_query($Connection,$Query);
       move_uploaded_file($_FILES["Image"]["tmp_name"], $Target);
       if ($Execute){
-        $_SESSION["SuccessMessage"] = "Post Added Successfully.";
-        Redirect_to("AddNewPost.php");
+        $_SESSION["SuccessMessage"] = "Post Updated Successfully.";
+        Redirect_to("Dashboard.php");
       }else {
         $_SESSION["ErrorMessage"] = "Something went wrong. Try Again!!";
-        Redirect_to("AddNewPost.php");
+        Redirect_to("Dashboard.php");
       }
     }
   }
@@ -88,7 +90,7 @@
                     $PostToBeUpdated = $DataRows['post'];
                   }
                    ?>
-                  <form action="AddNewPost.php" method="post" enctype="multipart/form-data">
+                  <form action="EditPost.php?Edit=<?php echo $SearchQueryParameter; ?>" method="post" enctype="multipart/form-data">
                     <fieldset>
                       <div class="form-group">
                         <label for="title"><span class="FieldInfo">Title:</span></label>
@@ -127,7 +129,7 @@
                         </textarea>
                       </div>
                       <br>
-                      <input class="btn btn-success btn-block" type="Submit" name="Submit" value="Add New Post">
+                      <input class="btn btn-success btn-block" type="Submit" name="Submit" value="Update Post">
                       <br>
                     </form>
                     </fieldset>
