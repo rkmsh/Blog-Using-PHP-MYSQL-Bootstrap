@@ -51,6 +51,21 @@
       font-family: Bitter, Georgia, "Times New Roman", Times, serif;
       font-size: 1.2em;
     }
+    .CommentBlock{
+      background-color: #F6F7F9;
+    }
+    .Comment-info{
+      color: #365899;
+      font-family: sans-sans-serif;
+      font-size: 1.1em;
+      font-weight: bold;
+      padding-top: 10px;
+    }
+    .Comment{
+      margin-top: -2px;
+      padding-bottom: 10px;
+      font-size: 1.1em;
+    }
     </style>
   </head>
   <body>
@@ -137,10 +152,30 @@
          <?php } ?>
          <br><br>
          <br><br>
+         <span class="FieldInfo">Comments:</span>
+         <?php
+         $Connection;
+         $PostIdForComments = $_GET["id"];
+         $ExtractingCommentsQuery = "SELECT * FROM comments WHERE admin_panel_id = '$PostIdForComments'";
+         $Execute = mysqli_query($Connection, $ExtractingCommentsQuery);
+         while($DataRows = mysqli_fetch_array($Execute)){
+           $CommentDate = $DataRows["datetime"];
+           $CommenterName = $DataRows["name"];
+           $Comments = $DataRows["comment"];
+
+          ?>
+          <div class="CommentBlock">
+            <img style="margin-left: 10px; margin-top: 10px;" class="pull-left" src="images/comment.png" width="70px";height="70px";>
+            <p style="margin-left: 90px;" class="Comment-info"><?php echo $CommenterName; ?></p>
+            <p style="margin-left: 90px;" class="description"><?php echo $CommentDate; ?></p>
+            <p style="margin-left: 90px;" class="Comment"><?php echo $Comments; ?></p>
+          </div>
+          <hr>
+        <?php } ?>
+         <br>
          <span class="FieldInfo">Share your thoughts about this post.</span>
          <br>
-         <span class="FieldInfo">Comments:</span>
-         <br><br>
+         <br>
          <div>
            <form action="FullPost.php?id=<?php echo $PostId; ?>" method="post" enctype="multipart/form-data">
              <fieldset>
