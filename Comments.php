@@ -84,7 +84,7 @@
                     </tr>
                     <?php
                     $Connection;
-                    $Query = "SELECT * FROM comments WHERE status='OFF'";
+                    $Query = "SELECT * FROM comments WHERE status='OFF' ORDER BY datetime desc";
                     $Execute = mysqli_query($Connection, $Query);
                     $SrNo = 0;
                     while($DataRows = mysqli_fetch_array($Execute)){
@@ -103,9 +103,9 @@
                        <td style="color: #5e5eff"><?php echo htmlentities($PersonName); ?></td>
                        <td><?php echo htmlentities($DateTimeofComment); ?></td>
                        <td><?php echo htmlentities($PersonComment); ?></td>
-                       <td><a href="#"><span class="btn btn-success">Approve</span></a></td>
+                       <td><a href="ApproveComments.php?id=<?php echo $CommentId; ?>"><span class="btn btn-success">Approve</span></a></td>
                       <td><a href="#"><span class="btn btn-danger">Delete</span></a></td>
-                      <td><a href="#"><span class="btn btn-primary">Live Preview</span></a></td>
+                      <td><a href="FullPost.php?id=<?php echo $CommentedPostId; ?>" target="_blank"><span class="btn btn-primary">Live Preview</span></a></td>
                      </tr>
                    <?php } ?>
                   </table>
@@ -124,7 +124,7 @@
                     </tr>
                     <?php
                     $Connection;
-                    $Query = "SELECT * FROM comments WHERE status='ON'";
+                    $Query = "SELECT * FROM comments WHERE status='ON' ORDER BY datetime desc";
                     $Execute = mysqli_query($Connection, $Query);
                     $SrNo = 0;
                     while($DataRows = mysqli_fetch_array($Execute)){
@@ -144,7 +144,7 @@
                        <td><?php echo htmlentities($PersonComment); ?></td>
                        <td><a href="#"><span class="btn btn-success">Approve</span></a></td>
                       <td><a href="#"><span class="btn btn-danger">Delete</span></a></td>
-                      <td><a href="#"><span class="btn btn-primary">Live Preview</span></a></td>
+                      <td><a href="FullPost.php?id=<?php echo $CommentedPostId; ?>" target="_blank"><span class="btn btn-primary">Live Preview</span></a></td>
                      </tr>
                    <?php } ?>
                   </table>
