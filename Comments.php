@@ -94,7 +94,7 @@
                       $PersonComment = $DataRows['comment'];
                       $CommentedPostId = $DataRows['admin_panel_id'];
                       $SrNo++;
-                      if(strlen($PersonComment) > 18){$PersonComment = substr($PersonComment,0,18)."...";}
+                      
                       if(strlen($PersonName) > 10){$PersonComment = substr($PersonName,0,10)."...";}
 
                      ?>
@@ -136,7 +136,7 @@
                       $PersonComment = $DataRows['comment'];
                       $CommentedPostId = $DataRows['admin_panel_id'];
                       $SrNo++;
-                      if(strlen($PersonComment) > 18){$PersonComment = substr($PersonComment,0,18)."...";}
+
                       if(strlen($PersonName) > 10){$PersonComment = substr($PersonName,0,10)."...";}
                      ?>
                      <tr>
