@@ -104,7 +104,7 @@
                        <td><?php echo htmlentities($DateTimeofComment); ?></td>
                        <td><?php echo htmlentities($PersonComment); ?></td>
                        <td><a href="ApproveComments.php?id=<?php echo $CommentId; ?>"><span class="btn btn-success">Approve</span></a></td>
-                      <td><a href="#"><span class="btn btn-danger">Delete</span></a></td>
+                      <td><a href="DeleteComments.php?id=<?php echo $CommentId; ?>"><span class="btn btn-danger">Delete</span></a></td>
                       <td><a href="FullPost.php?id=<?php echo $CommentedPostId; ?>" target="_blank"><span class="btn btn-primary">Live Preview</span></a></td>
                      </tr>
                    <?php } ?>
@@ -146,7 +146,7 @@
                        <td><?php echo htmlentities($PersonComment); ?></td>
                        <td><?php echo $Admin; ?></td>
                        <td><a href="DisApproveComments.php?id=<?php echo $CommentId; ?>"><span class="btn btn-warning">Dis-Approve</span></a></td>
-                      <td><a href="#"><span class="btn btn-danger">Delete</span></a></td>
+                      <td><a href="DeleteComments.php?id=<?php echo $CommentId; ?>"><span class="btn btn-danger">Delete</span></a></td>
                       <td><a href="FullPost.php?id=<?php echo $CommentedPostId; ?>" target="_blank"><span class="btn btn-primary">Live Preview</span></a></td>
                      </tr>
                    <?php } ?>
