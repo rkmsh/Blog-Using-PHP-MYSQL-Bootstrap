@@ -156,7 +156,7 @@
          <?php
          $Connection;
          $PostIdForComments = $_GET["id"];
-         $ExtractingCommentsQuery = "SELECT * FROM comments WHERE admin_panel_id = '$PostIdForComments'";
+         $ExtractingCommentsQuery = "SELECT * FROM comments WHERE admin_panel_id = '$PostIdForComments' AND status = 'ON'";
          $Execute = mysqli_query($Connection, $ExtractingCommentsQuery);
          while($DataRows = mysqli_fetch_array($Execute)){
            $CommentDate = $DataRows["datetime"];

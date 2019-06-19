@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Dash Board</title>
+    <title>Comments</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
     <script src="js/jquery-3.2.1.min.js"></script>
@@ -54,11 +54,11 @@
             <div class="col-sm-2">
                 <br><br>
                 <ul id="Side_Menu" class="nav nav-pills nav-stacked">
-                    <li class="active"><a href="Dashboard.php"><span class="glyphicon glyphicon-th"></span>&nbsp;Dashboard</a></li>
+                    <li><a href="Dashboard.php"><span class="glyphicon glyphicon-th"></span>&nbsp;Dashboard</a></li>
                     <li><a href="AddNewPost.php"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Add New Post</a></li>
                     <li><a href="Categories.php"><span class="glyphicon glyphicon-tags"></span>&nbsp;Categories</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-user"></span>&nbsp;Manage Admins</a></li>
-                    <li><a href="Comments.php"><span class="glyphicon glyphicon-comment"></span>&nbsp;Comments</a></li>
+                    <li class="active"><a href="Comments.php"><span class="glyphicon glyphicon-comment"></span>&nbsp;Comments</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-equalizer"></span>&nbsp;Live Blog</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Logout</a></li>
                 </ul>
@@ -70,67 +70,86 @@
                   echo SuccessMessage();
                   ?>
              </div>
-                <h1>Admin Dashboard</h1>
+                <h1>Un-Approved Comments</h1>
                 <div class="table-responsive">
                   <table class="table table-striped table-hover">
                     <tr>
-                      <th>No</th>
-                      <th>Post Title</th>
-                      <th>Date & Time</th>
-                      <th>Author</th>
-                      <th>Category</th>
-                      <th>Banner</th>
-                      <th>Comments</th>
-                      <th>Action</th>
+                      <th>No.</th>
+                      <th>Name</th>
+                      <th>Date</th>
+                      <th>Comment</th>
+                      <th>Approve</th>
+                      <th>Delete Comment</th>
                       <th>Details</th>
                     </tr>
                     <?php
                     $Connection;
-                    $ViewQuery = "SELECT * FROM admin_panel ORDER BY datetime desc";
-                    $Execute = mysqli_query($Connection, $ViewQuery);
+                    $Query = "SELECT * FROM comments WHERE status='OFF'";
+                    $Execute = mysqli_query($Connection, $Query);
                     $SrNo = 0;
                     while($DataRows = mysqli_fetch_array($Execute)){
-                      $Id = $DataRows["id"];
-                      $DateTime = $DataRows["datetime"];
-                      $Title = $DataRows["title"];
-                      $Category = $DataRows["category"];
-                      $Admin = $DataRows["author"];
-                      $Image = $DataRows["image"];
-                      $Post = $DataRows["post"];
+                      $CommentId = $DataRows['id'];
+                      $DateTimeofComment = $DataRows['datetime'];
+                      $PersonName = $DataRows['name'];
+                      $PersonComment = $DataRows['comment'];
+                      $CommentedPostId = $DataRows['admin_panel_id'];
                       $SrNo++;
-                      ?>
-                      <tr>
-                        <td><?php echo $SrNo ?></td>
-                        <td style="color: #5e5eff;"><?php
-                        if(strlen($Title)>20){$Title = substr($Title, 0, 20)."..";}
-                        echo $Title ?>
-                      </td>
-                        <td><?php
-                        if(strlen($DateTime)>11){$DateTime = substr($DateTime, 0, 11)."..";}
-                        echo $DateTime ?>
-                        </td>
-                        <td><?php
-                        if(strlen($Admin)>6){$Admin = substr($Admin, 0, 6)."..";}
-                        echo $Admin ?>
-                        </td>
-                        <td><?php
-                        if(strlen($Category)>7){$Category = substr($Category, 0, 7)."..";}
-                        echo $Category ?></td>
-                        <td><img src="Upload/<?php echo $Image ?>" width="200";height="40px"></td>
-                        <td>Processing</td>
-                        <td><a href="EditPost.php?Edit=<?php echo $Id; ?>">
-                          <span class="btn btn-warning">Edit</span></a>
-                        <a href="DeletePost.php?Delete=<?php echo $Id; ?>">
-                          <span class="btn btn-danger">Delete</span></a></td>
-                        <td>
-                          <a href="FullPost.php?id=<?php echo $Id; ?>" target="_blank">
-                          <span class="btn btn-primary">Live Preview</span></a></td>
-                      </tr>
-                    <?php } ?>
+                      if(strlen($PersonComment) > 18){$PersonComment = substr($PersonComment,0,18)."...";}
+                      if(strlen($PersonName) > 10){$PersonComment = substr($PersonName,0,10)."...";}
+
+                     ?>
+                     <tr>
+                       <td><?php echo htmlentities($SrNo); ?></td>
+                       <td style="color: #5e5eff"><?php echo htmlentities($PersonName); ?></td>
+                       <td><?php echo htmlentities($DateTimeofComment); ?></td>
+                       <td><?php echo htmlentities($PersonComment); ?></td>
+                       <td><a href="#"><span class="btn btn-success">Approve</span></a></td>
+                      <td><a href="#"><span class="btn btn-danger">Delete</span></a></td>
+                      <td><a href="#"><span class="btn btn-primary">Live Preview</span></a></td>
+                     </tr>
+                   <?php } ?>
+                  </table>
+                </div>
+                <h1>Approved Comments</h1>
+                <div class="table-responsive">
+                  <table class="table table-striped table-hover">
+                    <tr>
+                      <th>No.</th>
+                      <th>Name</th>
+                      <th>Date</th>
+                      <th>Comment</th>
+                      <th>Approve</th>
+                      <th>Delete Comment</th>
+                      <th>Details</th>
+                    </tr>
+                    <?php
+                    $Connection;
+                    $Query = "SELECT * FROM comments WHERE status='ON'";
+                    $Execute = mysqli_query($Connection, $Query);
+                    $SrNo = 0;
+                    while($DataRows = mysqli_fetch_array($Execute)){
+                      $CommentId = $DataRows['id'];
+                      $DateTimeofComment = $DataRows['datetime'];
+                      $PersonName = $DataRows['name'];
+                      $PersonComment = $DataRows['comment'];
+                      $CommentedPostId = $DataRows['admin_panel_id'];
+                      $SrNo++;
+                      if(strlen($PersonComment) > 18){$PersonComment = substr($PersonComment,0,18)."...";}
+                      if(strlen($PersonName) > 10){$PersonComment = substr($PersonName,0,10)."...";}
+                     ?>
+                     <tr>
+                       <td><?php echo htmlentities($SrNo); ?></td>
+                       <td style="color: #5e5eff"><?php echo htmlentities($PersonName); ?></td>
+                       <td><?php echo htmlentities($DateTimeofComment); ?></td>
+                       <td><?php echo htmlentities($PersonComment); ?></td>
+                       <td><a href="#"><span class="btn btn-success">Approve</span></a></td>
+                      <td><a href="#"><span class="btn btn-danger">Delete</span></a></td>
+                      <td><a href="#"><span class="btn btn-primary">Live Preview</span></a></td>
+                     </tr>
+                   <?php } ?>
                   </table>
                 </div>
             </div><!--Ending of Main Area-->
-
         </div><!--Ending of Row-->
     </div><!--Ending of container fluid-->
 
