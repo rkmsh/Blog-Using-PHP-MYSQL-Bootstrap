@@ -92,6 +92,7 @@
                       <th>Date & Time</th>
                       <th>Category Name</th>
                       <th>Creator Name</th>
+                      <th>Action</th>
                     </tr>
                     <?php
                     global $Connection;
@@ -110,6 +111,9 @@
                        <td><?php echo $DateTime; ?></td>
                        <td><?php echo $CategoryName; ?></td>
                        <td><?php echo $CreatorName; ?></td>
+                       <td><a href="DeleteCategory.php?id=<?php echo $ID; ?>">
+                         <span class="btn btn-danger">Delete</span>
+                       </a></td>
                      </tr>
                    <?php } ?>
                   </table>
