@@ -107,28 +107,28 @@
                     <tr>
                       <th>Sr No.</th>
                       <th>Date & Time</th>
-                      <th>Category Name</th>
-                      <th>Creator Name</th>
+                      <th>Admin Name</th>
+                      <th>Added By</th>
                       <th>Action</th>
                     </tr>
                     <?php
                     global $Connection;
-                    $ViewQuery = "SELECT * FROM category ORDER BY datetime desc";
+                    $ViewQuery = "SELECT * FROM registration ORDER BY datetime desc";
                     $Execute = mysqli_query($Connection, $ViewQuery);
                     $SrNo = 0;
                     while($DataRows = mysqli_fetch_array($Execute)){
-                      $ID = $DataRows["id"];
+                      $Id = $DataRows["id"];
                       $DateTime = $DataRows["datetime"];
-                      $CategoryName = $DataRows["name"];
-                      $CreatorName = $DataRows["creatorname"];
+                      $Username = $DataRows["username"];
+                      $Admin = $DataRows["addedby"];
                       $SrNo++;
                      ?>
                      <tr>
                        <td><?php echo $SrNo; ?></td>
                        <td><?php echo $DateTime; ?></td>
-                       <td><?php echo $CategoryName; ?></td>
-                       <td><?php echo $CreatorName; ?></td>
-                       <td><a href="DeleteCategory.php?id=<?php echo $ID; ?>">
+                       <td><?php echo $Username; ?></td>
+                       <td><?php echo $Admin; ?></td>
+                       <td><a href="DeleteAdmin.php?id=<?php echo $Id; ?>">
                          <span class="btn btn-danger">Delete</span>
                        </a></td>
                      </tr>
