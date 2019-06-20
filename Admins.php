@@ -4,29 +4,34 @@
 
 <?php
   if(isset($_POST["Submit"])){
-    $Category = mysqli_real_escape_string($Connection, $_POST["Category"]);
+    $Username = mysqli_real_escape_string($Connection, $_POST["Username"]);
+    $Password = mysqli_real_escape_string($Connection, $_POST["Password"]);
+    $ConfirmPassword = mysqli_real_escape_string($Connection, $_POST["ConfirmPassword"]);
     date_default_timezone_set("Asia/Kolkata");
     $CurrentTime = Time();
     $DateTime = strftime("%B-%d-%Y %H:%M:%S", $CurrentTime);
     $DateTime;
     $Admin = "Rohit Mahato";
-    if(empty($Category)){
+    if(empty($Username) || empty($Username) || empty($ConfirmPassword)){
       $_SESSION["ErrorMessage"] = "All fields must be filled out";
-      Redirect_to("Dashboard.php");
-    }elseif (strlen($Category) > 99){
-      $_SESSION["ErrorMessage"] = "Too Long Name";
-      Redirect_to("Categories.php");
+      Redirect_to("Admins.php");
+    }elseif (strlen($Password) < 4){
+      $_SESSION["ErrorMessage"] = "Atleast 4 characters for Password are required.";
+      Redirect_to("Admins.php");
+    }elseif ($Password !== $ConfirmPassword){
+      $_SESSION["ErrorMessage"] = "Password / Confirm Password does not match.";
+      Redirect_to("Admins.php");
     }else {
       global $Connection;
-      $Query = "INSERT INTO category(datetime,name,creatorname)
-      VALUES('$DateTime','$Category','$Admin')";
+      $Query = "INSERT INTO registration(datetime,username,password,addedby)
+      VALUES('$DateTime','$Username','$Password','$Admin')";
       $Execute = mysqli_query($Connection,$Query);
       if ($Execute){
-        $_SESSION["SuccessMessage"] = "Category Added Successfully.";
-        Redirect_to("Categories.php");
+        $_SESSION["SuccessMessage"] = "Admin Added Successfully.";
+        Redirect_to("Admins.php");
       }else {
-        $_SESSION["ErrorMessage"] = "Category failed to Add.";
-        Redirect_to("Categories.php");
+        $_SESSION["ErrorMessage"] = "Admin failed to Add.";
+        Redirect_to("Admins.php");
       }
     }
   }
@@ -36,7 +41,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Dash Board</title>
+    <title>Manage Admin</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
     <script src="js/jquery-3.2.1.min.js"></script>
@@ -57,30 +62,42 @@
                 <ul id="Side_Menu" class="nav nav-pills nav-stacked">
                     <li><a href="Dashboard.php"><span class="glyphicon glyphicon-th"></span>&nbsp;Dashboard</a></li>
                     <li><a href="AddNewPost.php"><span class="glyphicon glyphicon-list-alt"></span>&nbsp;Add New Post</a></li>
-                    <li class="active"><a href="Categories.php"><span class="glyphicon glyphicon-tags"></span>&nbsp;Categories</a></li>
-                    <li><a href="Admins.php"><span class="glyphicon glyphicon-user"></span>&nbsp;Manage Admins</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-comment"></span>&nbsp;Comments</a></li>
+                    <li><a href="Categories.php"><span class="glyphicon glyphicon-tags"></span>&nbsp;Categories</a></li>
+                    <li class="active"><a href="Admins.php"><span class="glyphicon glyphicon-user"></span>&nbsp;Manage Admins</a></li>
+                    <li><a href="Comments.php"><span class="glyphicon glyphicon-comment"></span>&nbsp;Comments</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-equalizer"></span>&nbsp;Live Blog</a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Logout</a></li>
                 </ul>
             </div><!--Ending of Side Area-->
             <div class="col-sm-10">
-                <h1>Manage Categories</h1>
+                <h1>Manage Admin Access</h1>
                 <?php
                 echo Message();
                 echo SuccessMessage();
                ?>
                 <div>
-                  <form action="Categories.php" method="post">
+                  <form action="Admins.php" method="post">
                     <fieldset>
                       <div class="form-group">
 
 
-                        <label for="categoryname"><span class="FieldInfo">Name:</span></label>
-                        <input class="form-control" type="text" name="Category" id="categoryname" placeholder="Name">
+                        <label for="Username"><span class="FieldInfo">UserName:</span></label>
+                        <input class="form-control" type="text" name="Username" id="Username" placeholder="Username">
+                      </div>
+                      <div class="form-group">
+
+
+                        <label for="Password"><span class="FieldInfo">Password:</span></label>
+                        <input class="form-control" type="Password" name="Password" id="Password" placeholder="Password">
+                      </div>
+                      <div class="form-group">
+
+
+                        <label for="ConfirmPassword"><span class="FieldInfo">Confirm Password:</span></label>
+                        <input class="form-control" type="Password" name="ConfirmPassword" id="ConfirmPassword" placeholder="Retype Same Password">
                       </div>
                       <br>
-                      <input class="btn btn-success btn-block" type="Submit" name="Submit" value="Add New Category">
+                      <input class="btn btn-success btn-block" type="Submit" name="Submit" value="Add New Admin">
                       <br>
                     </form>
                     </fieldset>
