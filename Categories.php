@@ -10,7 +10,7 @@
     $CurrentTime = Time();
     $DateTime = strftime("%B-%d-%Y %H:%M:%S", $CurrentTime);
     $DateTime;
-    $Admin = "Rohit Mahato";
+    $Admin = $_SESSION["Username"];
     if(empty($Category)){
       $_SESSION["ErrorMessage"] = "All fields must be filled out";
       Redirect_to("Dashboard.php");
