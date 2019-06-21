@@ -19,8 +19,8 @@
     }else {
       $PostIDFromURL = $_GET["id"];
       global $Connection;
-      $Query = "INSERT INTO comments(datetime, name, email, comment, status, admin_panel_id)
-      VALUES('$DateTime','$Name','$Email','$Comment','OFF', '$PostIDFromURL')";
+      $Query = "INSERT INTO comments(datetime, name, email, comment, approvedby, status, admin_panel_id)
+      VALUES('$DateTime','$Name','$Email','$Comment', 'Pending','OFF', '$PostIDFromURL')";
       $Execute = mysqli_query($Connection,$Query);
       if ($Execute){
         $_SESSION["SuccessMessage"] = "Comment Submitted Successfully.";
