@@ -11,7 +11,7 @@
       Redirect_to("Login.php");
     }else {
       $Found_Account = Login_Attempt($Username, $Password);
-      $_SESSION["USER_Id"] = $Found_Account["id"];
+      $_SESSION["User_Id"] = $Found_Account["id"];
       $_SESSION["Username"] = $Found_Account["username"];
       if($Found_Account){
         $_SESSION["SuccessMessage"] = "Welcome! {$_SESSION["Username"]}";

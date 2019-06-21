@@ -74,7 +74,7 @@
                       <?php } ?>
                     </a></li>
                     <li><a href="#"><span class="glyphicon glyphicon-equalizer"></span>&nbsp;Live Blog</a></li>
-                    <li><a href="#"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Logout</a></li>
+                    <li><a href="Logout.php"><span class="glyphicon glyphicon-log-out"></span>&nbsp;Logout</a></li>
                 </ul>
             </div><!--Ending of Side Area-->
             <div class="col-sm-10"><!--Main Area-->
