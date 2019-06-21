@@ -12,7 +12,7 @@
     $DateTime = strftime("%B-%d-%Y %H:%M:%S", $CurrentTime);
     $DateTime;
     $Admin = "Rohit Mahato";
-    if(empty($Username) || empty($Username) || empty($ConfirmPassword)){
+    if(empty($Username) || empty($Password) || empty($ConfirmPassword)){
       $_SESSION["ErrorMessage"] = "All fields must be filled out";
       Redirect_to("Admins.php");
     }elseif (strlen($Password) < 4){

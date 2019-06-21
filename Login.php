@@ -6,32 +6,19 @@
   if(isset($_POST["Submit"])){
     $Username = mysqli_real_escape_string($Connection, $_POST["Username"]);
     $Password = mysqli_real_escape_string($Connection, $_POST["Password"]);
-    $ConfirmPassword = mysqli_real_escape_string($Connection, $_POST["ConfirmPassword"]);
-    date_default_timezone_set("Asia/Kolkata");
-    $CurrentTime = Time();
-    $DateTime = strftime("%B-%d-%Y %H:%M:%S", $CurrentTime);
-    $DateTime;
-    $Admin = "Rohit Mahato";
-    if(empty($Username) || empty($Username) || empty($ConfirmPassword)){
+    if(empty($Username) || empty($Password)){
       $_SESSION["ErrorMessage"] = "All fields must be filled out";
-      Redirect_to("Admins.php");
-    }elseif (strlen($Password) < 4){
-      $_SESSION["ErrorMessage"] = "Atleast 4 characters for Password are required.";
-      Redirect_to("Admins.php");
-    }elseif ($Password !== $ConfirmPassword){
-      $_SESSION["ErrorMessage"] = "Password / Confirm Password does not match.";
-      Redirect_to("Admins.php");
+      Redirect_to("Login.php");
     }else {
-      global $Connection;
-      $Query = "INSERT INTO registration(datetime,username,password,addedby)
-      VALUES('$DateTime','$Username','$Password','$Admin')";
-      $Execute = mysqli_query($Connection,$Query);
-      if ($Execute){
-        $_SESSION["SuccessMessage"] = "Admin Added Successfully.";
-        Redirect_to("Admins.php");
-      }else {
-        $_SESSION["ErrorMessage"] = "Admin failed to Add.";
-        Redirect_to("Admins.php");
+      $Found_Account = Login_Attempt($Username, $Password);
+      $_SESSION["USER_Id"] = $Found_Account["id"];
+      $_SESSION["Username"] = $Found_Account["username"];
+      if($Found_Account){
+        $_SESSION["SuccessMessage"] = "Welcome! {$_SESSION["Username"]}";
+        Redirect_to("Dashboard.php");
+      }else{
+        $_SESSION["ErrorMessage"] = "Invalid Username / Password";
+        Redirect_to("Login.php");
       }
     }
   }
@@ -41,7 +28,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Manage Admin</title>
+    <title>Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="css/bootstrap.min.css">
     <script src="js/jquery-3.2.1.min.js"></script>
@@ -87,15 +74,15 @@
         <div class="row">
 
             <div class="col-sm-offset-4 col-sm-10 col-sm-4">
-              <?php
-              echo Message();
-              echo SuccessMessage();
-             ?>
              <br><br><br><br>
+             <?php
+             echo Message();
+             echo SuccessMessage();
+            ?>
                 <h2>Welcome Back!</h2>
 
                 <div>
-                  <form action="Admins.php" method="post">
+                  <form action="Login.php" method="post">
                     <fieldset>
                       <div class="form-group">
                         <label for="Username"><span class="FieldInfo">UserName:</span></label>
