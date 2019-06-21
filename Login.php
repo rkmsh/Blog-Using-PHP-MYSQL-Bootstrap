@@ -98,18 +98,23 @@
                   <form action="Admins.php" method="post">
                     <fieldset>
                       <div class="form-group">
-
-
                         <label for="Username"><span class="FieldInfo">UserName:</span></label>
+                        <div class="input-group input-group-lg">
+                          <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-envelope text-primary"></span>
+                          </span>
                         <input class="form-control" type="text" name="Username" id="Username" placeholder="Username">
                       </div>
+                      </div>
                       <div class="form-group">
-
-
                         <label for="Password"><span class="FieldInfo">Password:</span></label>
+                        <div class="input-group input-group-lg">
+                          <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-lock text-primary"></span>
+                          </span>
                         <input class="form-control" type="Password" name="Password" id="Password" placeholder="Password">
                       </div>
-
+                    </div>
                       <br>
                       <input class="btn btn-info btn-block" type="Submit" name="Submit" value="Login">
                       <br>
