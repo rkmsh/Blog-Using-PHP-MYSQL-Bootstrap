@@ -108,6 +108,8 @@
                Read More &rsaquo;&rsaquo;</span></a>
            </div>
          <?php } ?>
+         <nav>
+           <ul class="pagination pull-left pagination-lg">
          <?php
          global $Connection;
          $QueryPagination = "SELECT COUNT(*) FROM admin_panel";
@@ -119,10 +121,20 @@
          $PostPagination = ceil($PostPagination);
          //echo $PostPerPage;
          for ($i=1;$i<=$PostPagination; $i++){
+             if(isset($Page)){
+             if($i == $Page){
+            ?>
 
-          ?>
-          <a href="Blog.php?Page=<?php echo $i; ?>"><?php echo $i; ?></a>
-        <?php } ?>
+            <li class="active"><a href="Blog.php?Page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+            <?php
+          }else{ ?>
+            <li><a href="Blog.php?Page=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+            <?php
+          }
+        }
+      }?>
+            </ul>
+          </nav>
         </div><!--Ending Blog Main Area-->
         <div class="col-sm-offset-1 col-sm-3"><!--Side Area-->
           <h2>Test</h2>
