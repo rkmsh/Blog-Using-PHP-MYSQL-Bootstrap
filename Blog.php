@@ -62,9 +62,20 @@
             global $Connection;
             if(isset($_GET["SearchButton"])){
               $Search = $_GET["Search"];
+              //Query When Search Button is active.
               $ViewQuery = "SELECT * FROM admin_panel WHERE datetime LIKE '%$Search%'
                OR title LIKE '%$Search%' OR category LIKE '%$Search%' OR post LIKE '%$Search%'";
-            }else{
+             }elseif(isset($_GET["Page"])){
+               //Query When Pagination is Active i.e Blog.php?Page=1
+               $Page = $_GET["Page"];
+               $ShowPostFrom = ($Page*5) - 5;
+               if($Page == 0 || $Page < 1){
+                 $ShowPostFrom = 0;
+               }else{}
+               $ViewQuery = "SELECT * FROM admin_panel ORDER BY datetime desc LIMIT $ShowPostFrom,5";
+             }
+            else{
+              //The default Query for Blog.php Page
             $ViewQuery = "SELECT * FROM admin_panel ORDER BY datetime desc LIMIT 0,5";}
             $Execute = mysqli_query($Connection, $ViewQuery);
             while($DataRows=mysqli_fetch_array($Execute)){
