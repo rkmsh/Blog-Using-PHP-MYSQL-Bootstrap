@@ -108,6 +108,21 @@
                Read More &rsaquo;&rsaquo;</span></a>
            </div>
          <?php } ?>
+         <?php
+         global $Connection;
+         $QueryPagination = "SELECT COUNT(*) FROM admin_panel";
+         $ExecutePagination = mysqli_query($Connection, $QueryPagination);
+         $RowPagination = mysqli_fetch_array($ExecutePagination);
+         $TotalPosts = array_shift($RowPagination);
+         //echo $TotalPosts;
+         $PostPagination = $TotalPosts / 5;
+         $PostPagination = ceil($PostPagination);
+         //echo $PostPerPage;
+         for ($i=1;$i<=$PostPagination; $i++){
+
+          ?>
+          <a href="Blog.php?Page=<?php echo $i; ?>"><?php echo $i; ?></a>
+        <?php } ?>
         </div><!--Ending Blog Main Area-->
         <div class="col-sm-offset-1 col-sm-3"><!--Side Area-->
           <h2>Test</h2>
