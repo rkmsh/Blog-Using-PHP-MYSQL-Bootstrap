@@ -110,6 +110,14 @@
          <?php } ?>
          <nav>
            <ul class="pagination pull-left pagination-lg">
+             <?php
+             if(isset($Page))
+             {
+                if($Page > 1){
+                  ?>
+                  <li><a href="Blog.php?Page=<?php echo $Page - 1; ?>">&laquo;</a></li>
+              <?php }
+            }?>
          <?php
          global $Connection;
          $QueryPagination = "SELECT COUNT(*) FROM admin_panel";
@@ -133,6 +141,14 @@
           }
         }
       }?>
+            <?php
+            if(isset($Page))
+            {
+               if($Page + 1 <= $PostPagination){
+                 ?>
+                 <li><a href="Blog.php?Page=<?php echo $Page + 1; ?>">&raquo;</a></li>
+             <?php }
+           }?>
             </ul>
           </nav>
         </div><!--Ending Blog Main Area-->
