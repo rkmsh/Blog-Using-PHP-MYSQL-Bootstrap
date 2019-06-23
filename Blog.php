@@ -65,7 +65,7 @@
               $ViewQuery = "SELECT * FROM admin_panel WHERE datetime LIKE '%$Search%'
                OR title LIKE '%$Search%' OR category LIKE '%$Search%' OR post LIKE '%$Search%'";
             }else{
-            $ViewQuery = "SELECT * FROM admin_panel ORDER BY datetime desc";}
+            $ViewQuery = "SELECT * FROM admin_panel ORDER BY datetime desc LIMIT 0,5";}
             $Execute = mysqli_query($Connection, $ViewQuery);
             while($DataRows=mysqli_fetch_array($Execute)){
               $PostId=$DataRows["id"];
