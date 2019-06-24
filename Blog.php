@@ -65,6 +65,10 @@
               //Query When Search Button is active.
               $ViewQuery = "SELECT * FROM admin_panel WHERE datetime LIKE '%$Search%'
                OR title LIKE '%$Search%' OR category LIKE '%$Search%' OR post LIKE '%$Search%'";
+             }elseif(isset($_GET["Category"])){
+               $Category = $_GET["Category"];
+               $ViewQuery = "SELECT * FROM admin_panel WHERE category = '$Category' ORDER BY datetime desc";
+               
              }elseif(isset($_GET["Page"])){
                //Query When Pagination is Active i.e Blog.php?Page=1
                $Page = $_GET["Page"];
@@ -167,7 +171,19 @@
               <h2 class="panel-title">Categories</h2>
             </div>
             <div class="panel-body">
-              Dummy Content
+              <?php
+                global $Connection;
+                $ViewQuery = "SELECT * FROM category ORDER BY datetime desc";
+                $Execute = mysqli_query($Connection, $ViewQuery);
+                while ($DataRows = mysqli_fetch_array($Execute)) {
+                  $Id = $DataRows['id'];
+                  $Category = $DataRows['name'];
+
+               ?>
+               <a href="Blog.php?Category=<?php echo $Category; ?>">
+                 <span id="heading"><?php echo $Category."<br>"; ?></span>
+               </a>
+             <?php } ?>
             </div>
             <div class="panel-footer">
 
