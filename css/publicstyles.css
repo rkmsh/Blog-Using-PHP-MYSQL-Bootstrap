@@ -37,3 +37,9 @@
   font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
   text-align: justify;
 }
+
+.imageicon{
+  max-width: 150px;
+  margin: 0 auto;
+  display: block;
+}

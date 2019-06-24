@@ -12,7 +12,7 @@
     <link rel="stylesheet" type="text/css" href="css/publicstyles.css">
     <style>
     .col-sm-3{
-      background-color: green;
+      /*background-color: green;*/
     }
     </style>
   </head>
@@ -153,7 +153,8 @@
           </nav>
         </div><!--Ending Blog Main Area-->
         <div class="col-sm-offset-1 col-sm-3"><!--Side Area-->
-          <h2>Test</h2>
+          <h2>About Me</h2>
+          <img class="img-responsive img-circle imageicon" src="images/Bunny.jpg">
           <p>This is testing paragraph. Any Error my occur as the user is going
             to test it violently.This is testing paragraph. Any Error my occur as the user is going
             to test it violently.This is testing paragraph. Any Error my occur as the user is going
