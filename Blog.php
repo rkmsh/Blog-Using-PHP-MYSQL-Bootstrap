@@ -162,6 +162,28 @@
             to test it violently.This is testing paragraph. Any Error my occur as the user is going
             to test it violently.
           </p>
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h2 class="panel-title">Categories</h2>
+            </div>
+            <div class="panel-body">
+              Dummy Content
+            </div>
+            <div class="panel-footer">
+
+            </div>
+          </div>
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h2 class="panel-title">Recent Posts</h2>
+            </div>
+            <div class="panel-body">
+              Dummy Content
+            </div>
+            <div class="panel-footer">
+
+            </div>
+          </div>
         </div><!--Side Area Ending-->
       </div><!--Row Ending-->
     </div><!--Container Ending-->
