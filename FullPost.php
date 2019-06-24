@@ -43,9 +43,6 @@
     <script src="js/bootstrap.min.js"></script>
     <link rel="stylesheet" type="text/css" href="css/publicstyles.css">
     <style>
-    .col-sm-3{
-      background-color: green;
-    }
     .FieldInfo{
       color: rgb(251, 174, 44);
       font-family: Bitter, Georgia, "Times New Roman", Times, serif;
@@ -199,7 +196,8 @@
          </div>
         </div><!--Ending Blog Main Area-->
         <div class="col-sm-offset-1 col-sm-3"><!--Side Area-->
-          <h2>Test</h2>
+          <h2>About Me</h2>
+          <img class="img-responsive img-circle imageicon" src="images/Bunny.jpg">
           <p>This is testing paragraph. Any Error my occur as the user is going
             to test it violently.This is testing paragraph. Any Error my occur as the user is going
             to test it violently.This is testing paragraph. Any Error my occur as the user is going
@@ -207,6 +205,59 @@
             to test it violently.This is testing paragraph. Any Error my occur as the user is going
             to test it violently.
           </p>
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h2 class="panel-title">Categories</h2>
+            </div>
+            <div class="panel-body">
+              <?php
+                global $Connection;
+                $ViewQuery = "SELECT * FROM category ORDER BY datetime desc";
+                $Execute = mysqli_query($Connection, $ViewQuery);
+                while ($DataRows = mysqli_fetch_array($Execute)) {
+                  $Id = $DataRows['id'];
+                  $Category = $DataRows['name'];
+
+               ?>
+               <a href="Blog.php?Category=<?php echo $Category; ?>">
+                 <span id="heading"><?php echo $Category."<br>"; ?></span>
+               </a>
+             <?php } ?>
+            </div>
+            <div class="panel-footer">
+
+            </div>
+          </div>
+          <div class="panel panel-primary background">
+            <div class="panel-heading">
+              <h2 class="panel-title">Recent Posts</h2>
+            </div>
+            <div class="panel-body">
+              <?php
+                $Connection;
+                $ViewQuery = "SELECT * FROM admin_panel ORDER BY datetime desc LIMIT 0,5";
+                $Execute = mysqli_query($Connection, $ViewQuery);
+                while ($DataRows = mysqli_fetch_array($Execute)) {
+                  $Id = $DataRows["id"];
+                  $Title = $DataRows["title"];
+                  $DateTime = $DataRows["datetime"];
+                  $Image = $DataRows["image"];
+                  if (strlen($DateTime)>11) {$DateTime = substr($DateTime,0,11);}
+               ?>
+               <div>
+                 <img class="pull-left" style="margin-top: 10px; margin-left: 10px;" src="Upload/<?php echo $Image; ?>" width="70";height="70";>
+                 <a href="FullPost.php?id=<?php echo $Id; ?>">
+                   <p id="heading" style="margin-left: 90px;"><?php echo htmlentities($Title); ?></p>
+                </a>
+                 <p class="description" style="margin-left: 90px;"><?php echo htmlentities($DateTime); ?></p>
+                 <hr>
+               </div>
+             <?php } ?>
+            </div>
+            <div class="panel-footer">
+
+            </div>
+          </div>
         </div><!--Side Area Ending-->
       </div><!--Row Ending-->
     </div><!--Container Ending-->

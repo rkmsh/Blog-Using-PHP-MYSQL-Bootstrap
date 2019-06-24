@@ -68,7 +68,7 @@
              }elseif(isset($_GET["Category"])){
                $Category = $_GET["Category"];
                $ViewQuery = "SELECT * FROM admin_panel WHERE category = '$Category' ORDER BY datetime desc";
-               
+
              }elseif(isset($_GET["Page"])){
                //Query When Pagination is Active i.e Blog.php?Page=1
                $Page = $_GET["Page"];
@@ -189,12 +189,31 @@
 
             </div>
           </div>
-          <div class="panel panel-primary">
+          <div class="panel panel-primary background">
             <div class="panel-heading">
               <h2 class="panel-title">Recent Posts</h2>
             </div>
             <div class="panel-body">
-              Dummy Content
+              <?php
+                $Connection;
+                $ViewQuery = "SELECT * FROM admin_panel ORDER BY datetime desc LIMIT 0,5";
+                $Execute = mysqli_query($Connection, $ViewQuery);
+                while ($DataRows = mysqli_fetch_array($Execute)) {
+                  $Id = $DataRows["id"];
+                  $Title = $DataRows["title"];
+                  $DateTime = $DataRows["datetime"];
+                  $Image = $DataRows["image"];
+                  if (strlen($DateTime)>11) {$DateTime = substr($DateTime,0,11);}
+               ?>
+               <div>
+                 <img class="pull-left" style="margin-top: 10px; margin-left: 10px;" src="Upload/<?php echo $Image; ?>" width="70";height="70";>
+                 <a href="FullPost.php?id=<?php echo $Id; ?>">
+                   <p id="heading" style="margin-left: 90px;"><?php echo htmlentities($Title); ?></p>
+                </a>
+                 <p class="description" style="margin-left: 90px;"><?php echo htmlentities($DateTime); ?></p>
+                 <hr>
+               </div>
+             <?php } ?>
             </div>
             <div class="panel-footer">
 
